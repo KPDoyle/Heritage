@@ -51,6 +51,9 @@ h1 { margin-top: 2px; font-size: clamp(26px, 3vw, 35px); }
 h2 { font-size: 30px; }
 h3 { font-size: 20px; }
 .top-actions { display: flex; align-items: center; gap: 10px; }
+.feature-link { min-height: 42px; display: inline-flex; align-items: center; gap: 7px; padding: 0 13px; border: 1px solid #c9a15f; border-radius: 9px; color: #704621; background: #fff5df; font-weight: 700; white-space: nowrap; }
+.feature-link:hover { color: var(--ink); background: #f8e7bd; }
+.feature-link span { font-size: 17px; }
 .role-switcher { height: 42px; display: flex; align-items: center; gap: 7px; padding: 0 10px; border: 1px solid var(--line); border-radius: 9px; background: rgba(255,255,255,.72); }
 .role-switcher span { color: var(--muted); font-size: 12px; font-weight: 700; white-space: nowrap; }
 .role-switcher select { max-width: 122px; border: 0; outline: 0; color: var(--ink); background: transparent; font-size: 13px; font-weight: 700; }
@@ -340,6 +343,7 @@ h3 { font-size: 20px; }
   .page-heading h1 { font-size: 25px; }
   .top-actions { width: 100%; display: grid; grid-template-columns: 1fr auto; }
   .role-switcher { display: flex; grid-column: 1 / -1; }
+  .feature-link { grid-column: 1 / -1; justify-content: center; width: 100%; }
   .role-switcher select { max-width: none; flex: 1; }
   .search-box { width: 100%; }
   .sync-pill { display: none; }
