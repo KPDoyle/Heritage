@@ -86,11 +86,12 @@ function projectRows(list = projects) {
 }
 
 function renderDashboard() {
-  pageTitle.textContent = workspaceMode === "publisher" ? "Good morning" : workspaceMode === "creator" ? "Creator overview" : "Customer overview";
+  pageTitle.textContent = workspaceMode === "publisher" ? "Good morning" : workspaceMode === "creator" ? "Creator overview" : workspaceMode === "client" ? "Customer overview" : "Strategic value";
   const roleCopy = {
     publisher: ["Portfolio control", "Six decisions need your attention.", "Move commissions from brief to publication while controlling rights, versions, budgets and bilingual approvals.", "Review approvals", "approvals", "Open pipeline", "commissions"],
     creator: ["Your working day", "One clear place to create and deliver.", "See the agreed brief, latest feedback, deadlines, rights and payment position without searching email chains.", "Open creator studio", "creator", "Upload latest draft", "creator"],
-    client: ["Commission visibility", "Know exactly where every deliverable stands.", "Review progress, approve the correct version, control changes and see how completed content performs.", "Open client portal", "client", "Review approvals", "approvals"]
+    client: ["Commission visibility", "Know exactly where every deliverable stands.", "Review progress, approve the correct version, control changes and see how completed content performs.", "Open client portal", "client", "Review approvals", "approvals"],
+    acquirer: ["Acquisition case", "See the value beyond the order book.", "Examine relationship capital, reusable content IP, operating transferability and buyer-specific upside.", "Open strategic value", "acquirer", "Review platform", "features"]
   }[workspaceMode];
   appContent.innerHTML = `
     <div class="hero-grid">
@@ -134,8 +135,87 @@ function renderFeatures() {
     </section>
     <div class="section-title-row feature-section-heading"><div><span class="eyebrow">Complete operating model</span><h2>Core platform capabilities</h2></div><span class="feature-count">30 capabilities</span></div>
     <section class="capability-grid">${capabilityGroups.map(group => `<article><h3>${group[0]}</h3><ul>${group[1].map(item => `<li>${item}</li>`).join("")}</ul></article>`).join("")}</section>
-    <section class="outcome-panel"><div><span class="eyebrow">What the platform changes</span><h2>A traceable publishing process—not a collection of email threads.</h2></div><div class="outcome-grid"><span><strong>One source of truth</strong>for briefs, content, rights and decisions</span><span><strong>Faster delivery</strong>with clear owners, dates and approvals</span><span><strong>Lower risk</strong>through provenance and permission control</span><span><strong>Stronger relationships</strong>with transparent creator and customer portals</span></div></section>`;
+    <section class="outcome-panel"><div><span class="eyebrow">What the platform changes</span><h2>A traceable publishing process—not a collection of email threads.</h2><button class="gold-button" data-view-jump="acquirer">See the acquisition case →</button></div><div class="outcome-grid"><span><strong>One source of truth</strong>for briefs, content, rights and decisions</span><span><strong>Faster delivery</strong>with clear owners, dates and approvals</span><span><strong>Lower risk</strong>through provenance and permission control</span><span><strong>Stronger relationships</strong>with transparent creator and customer portals</span></div></section>`;
   bindDynamicEvents();
+}
+
+function renderAcquirer() {
+  pageTitle.textContent = "Strategic value";
+  const relationships = [
+    ["Cultural foundations", "8–12 years", "14 engagements", "3 active", "Sponsor map + meeting history"],
+    ["Heritage & tourism bodies", "5–9 years", "9 engagements", "4 active", "Multi-contact coverage"],
+    ["Museums & archives", "6–10 years", "11 engagements", "2 active", "Access and permissions logged"],
+    ["Family & corporate patrons", "4–8 years", "7 engagements", "3 active", "Introductions + renewal history"]
+  ];
+  const ip = [
+    ["Editorial & research", "86%", "New editions, learning and licensing"],
+    ["Photography & archives", "91%", "Exhibitions, digital collections and syndication"],
+    ["Bilingual editions", "94%", "Regional distribution and adapted editions"],
+    ["Digital & exhibition assets", "82%", "Immersive, web and visitor experiences"]
+  ];
+  appContent.innerHTML = `
+    <section class="acquirer-hero">
+      <div><span class="eyebrow">Buyer evidence workspace</span><h2>Trusted Saudi access. Defensible heritage IP. A repeatable operating system.</h2><p>The acquisition case is not simply a publishing pipeline. It is the ability to win culturally sensitive commissions, turn them into rights-cleared intellectual property and deliver them through an operating model a buyer can scale.</p><div class="feature-actions"><button class="gold-button" data-acquirer-action="summary">Export buyer summary</button><button class="dark-outline-button" data-acquirer-action="dataroom">Open diligence room</button></div></div>
+      <aside><span class="evidence-score">78</span><strong>Evidence readiness</strong><p>Illustrative weighted score across commercial, relationship, IP and operating evidence.</p><small>12 items ready · 4 need verification</small></aside>
+    </section>
+    <div class="demo-notice"><strong>Illustrative buyer view.</strong> Replace demonstration values with verified company records before sharing externally.</div>
+    <section class="metrics acquirer-metrics">
+      <div class="metric"><small>Active commission value</small><div class="metric-row"><strong>£581k</strong><em>4 live projects</em></div></div>
+      <div class="metric"><small>Repeat / referred revenue</small><div class="metric-row"><strong>68%</strong><em>illustrative</em></div></div>
+      <div class="metric"><small>Rights-cleared IP</small><div class="metric-row"><strong>91%</strong><em>portfolio sample</em></div></div>
+      <div class="metric"><small>Relationship evidence</small><div class="metric-row"><strong>82%</strong><em>documented</em></div></div>
+    </section>
+    <div class="section-title-row"><div><span class="eyebrow">Relationship capital</span><h2>Saudi access made visible and transferable</h2></div><button class="secondary-button" data-acquirer-action="evidence">Add relationship evidence</button></div>
+    <section class="buyer-table relationship-table"><div class="buyer-table-head"><span>Relationship group</span><span>Tenure</span><span>Track record</span><span>Pipeline</span><span>Transfer evidence</span></div>${relationships.map(r => `<article>${r.map((v,i) => `<span ${i===0 ? 'class="table-lead"' : ''}>${v}</span>`).join("")}</article>`).join("")}</section>
+    <div class="two-column buyer-columns">
+      <section class="panel"><div class="card-title-row"><div><span class="eyebrow">Content IP portfolio</span><h3>Reuse potential by asset class</h3></div><span class="status production">91% cleared</span></div><div class="ip-list">${ip.map(x => `<article><div><strong>${x[0]}</strong><small>${x[2]}</small></div><span>${x[1]} cleared</span></article>`).join("")}</div><button class="text-button" data-view-jump="assets">Inspect rights register →</button></section>
+      <section class="panel transfer-panel"><span class="eyebrow">Transferability</span><h3>Can the value survive a change of ownership?</h3><label><input type="checkbox" checked> Relationship owners and warm introductions documented</label><label><input type="checkbox" checked> Commission-to-publication workflow documented</label><label><input type="checkbox" checked> Contributor agreements and obligations indexed</label><label><input type="checkbox" checked> Rights, consent and licence evidence linked to assets</label><label><input type="checkbox"> Founder handover plan approved</label><label><input type="checkbox"> Top-customer renewal evidence verified</label></section>
+    </div>
+    <section class="synergy-panel">
+      <div class="synergy-copy"><span class="eyebrow">Buyer value bridge</span><h2>Model the upside a buyer can uniquely unlock.</h2><p>Adjust three levers to turn strategic fit into an explicit, testable acquisition thesis.</p><div class="synergy-result"><small>Illustrative annual opportunity</small><strong id="synergyValue">£444,000</strong><span id="synergyNarrative">2.0× distribution · 30% IP reuse · 15% pipeline conversion</span></div></div>
+      <div class="synergy-controls">
+        <label><span>Distribution reach <strong id="distributionLabel">2.0×</strong></span><input id="distributionUplift" type="range" min="1" max="5" step="0.5" value="2"></label>
+        <label><span>IP reuse rate <strong id="reuseLabel">30%</strong></span><input id="reuseRate" type="range" min="10" max="60" step="5" value="30"></label>
+        <label><span>Pipeline conversion <strong id="conversionLabel">15%</strong></span><input id="conversionRate" type="range" min="5" max="30" step="5" value="15"></label>
+        <button class="primary-button" data-acquirer-action="model">Save buyer scenario</button><small>Planning model only; not a valuation or forecast.</small>
+      </div>
+    </section>
+    <div class="section-title-row"><div><span class="eyebrow">Buyer fit</span><h2>Where the strategic premium could come from</h2></div></div>
+    <section class="buyer-fit-grid">
+      <article><strong>Saudi media group</strong><p>Local commissioning access plus a specialist content production capability.</p><span>Fit: market depth</span></article><article><strong>Global illustrated publisher</strong><p>Premium Arabic–English IP with wider rights and distribution potential.</p><span>Fit: distribution leverage</span></article><article><strong>Museum services group</strong><p>Editorial, archive and exhibition content combined in one delivery team.</p><span>Fit: service expansion</span></article><article><strong>Brand content studio</strong><p>Credibility in heritage storytelling and long-form institutional commissions.</p><span>Fit: capability adjacency</span></article>
+    </section>
+    <div class="two-column buyer-columns">
+      <section class="panel"><span class="eyebrow">Diligence readiness</span><h3>Evidence room</h3><div class="diligence-list"><button data-acquirer-action="commercial"><span>Commercial</span><strong>4 / 5 ready</strong></button><button data-acquirer-action="relationships"><span>Relationships</span><strong>3 / 4 ready</strong></button><button data-acquirer-action="rights"><span>IP & rights</span><strong>4 / 4 ready</strong></button><button data-acquirer-action="operations"><span>Operations</span><strong>3 / 4 ready</strong></button></div></section>
+      <section class="panel"><span class="eyebrow">Risks made discussable</span><h3>Key risks and mitigations</h3><div class="risk-list"><article><strong>Founder dependency</strong><span>Structured introductions and a 12-month handover plan</span></article><article><strong>Customer concentration</strong><span>Account diversification and framework renewals</span></article><article><strong>Legacy rights gaps</strong><span>Prioritised clearance programme linked to IP value</span></article><article><strong>Project revenue volatility</strong><span>Retainers, licensing and reusable product formats</span></article></div></section>
+    </div>`;
+  bindDynamicEvents();
+  bindAcquirerEvents();
+  updateSynergy();
+}
+
+function updateSynergy() {
+  const distribution = Number(document.getElementById("distributionUplift")?.value || 2);
+  const reuse = Number(document.getElementById("reuseRate")?.value || 30);
+  const conversion = Number(document.getElementById("conversionRate")?.value || 15);
+  const opportunity = 581000 * (distribution - 1) * .32 + 410000 * (reuse / 100) + 900000 * (conversion / 100);
+  const currency = new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 });
+  document.getElementById("distributionLabel").textContent = `${distribution.toFixed(1)}×`;
+  document.getElementById("reuseLabel").textContent = `${reuse}%`;
+  document.getElementById("conversionLabel").textContent = `${conversion}%`;
+  document.getElementById("synergyValue").textContent = currency.format(opportunity);
+  document.getElementById("synergyNarrative").textContent = `${distribution.toFixed(1)}× distribution · ${reuse}% IP reuse · ${conversion}% pipeline conversion`;
+}
+
+function bindAcquirerEvents() {
+  ["distributionUplift", "reuseRate", "conversionRate"].forEach(id => document.getElementById(id)?.addEventListener("input", updateSynergy));
+  document.querySelectorAll("[data-acquirer-action]").forEach(button => button.addEventListener("click", () => {
+    const action = button.dataset.acquirerAction;
+    if (action === "dataroom") return openAction({ eyebrow: "Controlled diligence", title: "Open buyer data room", submit: "Create access", fields: `<label class="full">Buyer email<input required name="email" type="email" placeholder="buyer@organisation.com"></label><label>Access profile<select name="profile"><option>Executive summary</option><option>Commercial diligence</option><option>Full diligence</option></select></label><label>Expires<select name="expiry"><option>In 14 days</option><option>In 30 days</option></select></label>`, onSubmit: data => showToast(`Secure buyer access prepared for ${data.get("email")}`) });
+    if (action === "evidence") return openAction({ eyebrow: "Relationship evidence", title: "Add transfer evidence", submit: "Add evidence", fields: `<label>Relationship group<select name="group"><option>Cultural foundations</option><option>Heritage & tourism bodies</option><option>Museums & archives</option><option>Family & corporate patrons</option></select></label><label>Evidence type<select name="type"><option>Meeting history</option><option>Contract renewal</option><option>Warm introduction</option><option>Reference</option></select></label><label class="full">Note<textarea required name="note" rows="4" placeholder="Record the evidence and where it can be verified"></textarea></label>`, onSubmit: () => showToast("Relationship evidence added to the diligence record") });
+    if (action === "summary") return showToast("Buyer summary prepared with an illustrative-data warning");
+    if (action === "model") return showToast("Buyer scenario saved for comparison");
+    showToast(`${button.textContent.trim()} evidence opened`);
+  }));
 }
 
 function renderCommissions() {
@@ -367,13 +447,14 @@ function switchView(view) {
   currentView = view;
   document.querySelectorAll(".nav-item").forEach(item => item.classList.toggle("active", item.dataset.view === view));
   document.querySelector(".sidebar").classList.remove("open");
-  const renderers = { dashboard: renderDashboard, features: renderFeatures, commissions: renderCommissions, creator: renderCreator, client: renderClient, publications: renderPublications, assets: renderAssets, approvals: renderApprovals, royalties: renderRoyalties, integrations: renderIntegrations };
+  const renderers = { dashboard: renderDashboard, features: renderFeatures, acquirer: renderAcquirer, commissions: renderCommissions, creator: renderCreator, client: renderClient, publications: renderPublications, assets: renderAssets, approvals: renderApprovals, royalties: renderRoyalties, integrations: renderIntegrations };
   (renderers[view] || renderDashboard)();
   window.scrollTo({top:0, behavior:"smooth"});
 }
 
 document.querySelectorAll(".nav-item").forEach(item => item.addEventListener("click", () => switchView(item.dataset.view)));
 document.getElementById("featuresLink").addEventListener("click", () => switchView("features"));
+document.getElementById("acquirerLink").addEventListener("click", () => switchView("acquirer"));
 document.getElementById("mobileMenu").addEventListener("click", () => document.querySelector(".sidebar").classList.toggle("open"));
 document.getElementById("newProjectButton").addEventListener("click", () => projectDialog.showModal());
 document.querySelectorAll("[data-close-dialog]").forEach(button => button.addEventListener("click", () => projectDialog.close()));
