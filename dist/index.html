@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Heritage Publishing OS — manage commissioned publications, rights, bilingual approvals, assets and publishing-system sync." />
+  <meta name="theme-color" content="#0b1520" />
+  <title>Heritage Publishing OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#dashboard" aria-label="Heritage Publishing OS home">
+        <span class="brand-mark">H</span>
+        <span class="brand-copy"><strong>Heritage</strong><small>Publishing OS</small></span>
+      </a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <button class="nav-item active" data-view="dashboard"><span class="nav-icon">⌂</span><span>Overview</span></button>
+        <button class="nav-item" data-view="commissions"><span class="nav-icon">◇</span><span>Commissions</span><em id="navCommissionCount">4</em></button>
+        <button class="nav-item" data-view="publications"><span class="nav-icon">▤</span><span>Publications</span></button>
+        <button class="nav-item" data-view="assets"><span class="nav-icon">□</span><span>Assets & rights</span><em class="warning-count">3</em></button>
+        <button class="nav-item" data-view="approvals"><span class="nav-icon">✓</span><span>Approvals</span><em id="navApprovalCount">6</em></button>
+        <button class="nav-item" data-view="integrations"><span class="nav-icon">↔</span><span>Integrations</span></button>
+      </nav>
+
+      <div class="side-foot">
+        <div class="mini-profile">
+          <span class="avatar">PH</span>
+          <span><strong>Peter Harrigan</strong><small>Publisher</small></span>
+          <button aria-label="Profile options">•••</button>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button>
+        <div class="page-heading">
+          <span class="eyebrow">Demo workspace</span>
+          <h1 id="pageTitle">Good morning</h1>
+        </div>
+        <div class="top-actions">
+          <label class="search-box">
+            <span>⌕</span>
+            <input id="globalSearch" type="search" placeholder="Search projects, titles, people" aria-label="Search" />
+          </label>
+          <button class="sync-pill" id="syncButton"><span class="pulse"></span><span>Consonance synced</span></button>
+          <button class="primary-button" id="newProjectButton"><span>＋</span> New commission</button>
+        </div>
+      </header>
+
+      <section id="appContent" class="content" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <dialog id="projectDialog" class="dialog">
+    <form id="projectForm" method="dialog">
+      <div class="dialog-head">
+        <div><span class="eyebrow">Create record</span><h2>New commission</h2></div>
+        <button type="button" class="icon-button" data-close-dialog aria-label="Close">×</button>
+      </div>
+      <div class="form-grid">
+        <label class="full">Project name<input required name="name" placeholder="e.g. Coastal Heritage Atlas" /></label>
+        <label>Client<input required name="client" placeholder="Organisation name" /></label>
+        <label>Market<select name="market"><option>Saudi Arabia</option><option>United Arab Emirates</option><option>Qatar</option><option>Oman</option><option>United Kingdom</option></select></label>
+        <label>Lead<select name="lead"><option>Peter Harrigan</option><option>Editorial team</option><option>External curator</option></select></label>
+        <label>Target date<input required name="date" type="date" /></label>
+        <label class="full">Deliverables<textarea name="deliverables" rows="3" placeholder="Bilingual book, exhibition captions, digital archive…"></textarea></label>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="secondary-button" data-close-dialog>Cancel</button>
+        <button type="submit" class="primary-button">Create commission</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="detailDialog" class="dialog detail-dialog">
+    <div id="detailContent"></div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
