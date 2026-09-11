@@ -22,6 +22,7 @@
       <nav class="nav" aria-label="Primary navigation">
         <button class="nav-item active" data-view="dashboard"><span class="nav-icon">⌂</span><span>Overview</span></button>
         <button class="nav-item" data-view="features" title="Platform features"><span class="nav-icon">◫</span><span>Platform features</span></button>
+        <button class="nav-item" data-view="acquirer" title="Strategic value"><span class="nav-icon">◆</span><span>Strategic value</span></button>
         <button class="nav-item" data-view="commissions"><span class="nav-icon">◇</span><span>Commissions</span><em id="navCommissionCount">4</em></button>
         <button class="nav-item" data-view="creator"><span class="nav-icon">✦</span><span>Creator studio</span><em id="navTaskCount">5</em></button>
         <button class="nav-item" data-view="client"><span class="nav-icon">◎</span><span>Client portal</span></button>
@@ -47,6 +48,7 @@
         <div class="page-heading">
           <span class="eyebrow">Demo workspace</span>
           <h1 id="pageTitle">Good morning</h1>
+          <button class="strategic-shortcut" id="acquirerLink">Strategic value →</button>
         </div>
         <div class="top-actions">
           <button class="feature-link" id="featuresLink"><span>◫</span> Platform features</button>
@@ -56,6 +58,7 @@
               <option value="publisher">Publisher</option>
               <option value="creator">Content provider</option>
               <option value="client">Customer</option>
+              <option value="acquirer">Acquirer</option>
             </select>
           </label>
           <label class="search-box">
