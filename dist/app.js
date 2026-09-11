@@ -373,6 +373,7 @@ function switchView(view) {
 }
 
 document.querySelectorAll(".nav-item").forEach(item => item.addEventListener("click", () => switchView(item.dataset.view)));
+document.getElementById("featuresLink").addEventListener("click", () => switchView("features"));
 document.getElementById("mobileMenu").addEventListener("click", () => document.querySelector(".sidebar").classList.toggle("open"));
 document.getElementById("newProjectButton").addEventListener("click", () => projectDialog.showModal());
 document.querySelectorAll("[data-close-dialog]").forEach(button => button.addEventListener("click", () => projectDialog.close()));
