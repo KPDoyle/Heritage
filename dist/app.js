@@ -115,6 +115,29 @@ function renderDashboard() {
   bindDynamicEvents();
 }
 
+function renderFeatures() {
+  pageTitle.textContent = "Platform features";
+  const capabilityGroups = [
+    ["Commission management", ["Opportunities and proposals", "Structured customer briefs", "Costed scopes and schedules", "Contributor commissioning", "Budget and change control"]],
+    ["Content production", ["Assignments and task tracking", "Chapter-level manuscript progress", "Versioned file delivery", "Research sources and citations", "Bilingual editorial workflow"]],
+    ["Governance and approval", ["Version-specific review", "Formal approvals and timestamps", "Controlled reviewer access", "Rights and consent records", "Licence expiry alerts"]],
+    ["Publishing operations", ["Edition and ISBN metadata", "Print, ebook and digital outputs", "Production milestones", "ONIX distribution", "Stock and fulfilment visibility"]],
+    ["Commercial reporting", ["Customer billing and budgets", "Contributor fees and milestones", "Royalty statements", "Sales by channel and territory", "Licensing income"]],
+    ["Connected systems", ["Consonance integration", "Digital asset libraries", "Translation platforms", "Finance and payments", "Webstores and distributors"]]
+  ];
+  appContent.innerHTML = `<section class="features-hero"><div><span class="eyebrow">Heritage Publishing OS</span><h2>One platform from commission to cultural impact.</h2><p>Heritage OS brings the customer, publisher and content team into one controlled workflow while connecting to specialist publishing systems.</p></div><div class="lifecycle"><span>Brief</span><i>→</i><span>Create</span><i>→</i><span>Approve</span><i>→</i><span>Publish</span><i>→</i><span>Measure</span></div></section>
+    <div class="section-title-row feature-section-heading"><div><span class="eyebrow">Designed around every participant</span><h2>Three connected workspaces</h2></div></div>
+    <section class="audience-grid">
+      <article><span class="audience-icon">P</span><h3>For publishers</h3><p>Control the commercial pipeline, programme, contributors, versions, rights, production and reporting.</p><ul><li>Portfolio and deadline visibility</li><li>Fewer duplicated records</li><li>Earlier risk identification</li><li>Reliable project profitability</li></ul><button class="text-button" data-view-jump="dashboard">Open publisher view →</button></article>
+      <article><span class="audience-icon creator">C</span><h3>For content providers</h3><p>Give authors, researchers, photographers, editors and translators one clear place to create and deliver.</p><ul><li>One accepted brief and deadline</li><li>Versioned content delivery</li><li>Consolidated feedback</li><li>Transparent fees and royalties</li></ul><button class="text-button" data-view-jump="creator">Open creator studio →</button></article>
+      <article><span class="audience-icon client">O</span><h3>For customers</h3><p>Give commissioning organisations a live view of progress, cost, decisions, rights and completed outputs.</p><ul><li>Progress without status meetings</li><li>Controlled reviews and approvals</li><li>Visible scope and budget</li><li>Evidence of cultural impact</li></ul><button class="text-button" data-view-jump="client">Open customer portal →</button></article>
+    </section>
+    <div class="section-title-row feature-section-heading"><div><span class="eyebrow">Complete operating model</span><h2>Core platform capabilities</h2></div><span class="feature-count">30 capabilities</span></div>
+    <section class="capability-grid">${capabilityGroups.map(group => `<article><h3>${group[0]}</h3><ul>${group[1].map(item => `<li>${item}</li>`).join("")}</ul></article>`).join("")}</section>
+    <section class="outcome-panel"><div><span class="eyebrow">What the platform changes</span><h2>A traceable publishing process—not a collection of email threads.</h2></div><div class="outcome-grid"><span><strong>One source of truth</strong>for briefs, content, rights and decisions</span><span><strong>Faster delivery</strong>with clear owners, dates and approvals</span><span><strong>Lower risk</strong>through provenance and permission control</span><span><strong>Stronger relationships</strong>with transparent creator and customer portals</span></div></section>`;
+  bindDynamicEvents();
+}
+
 function renderCommissions() {
   pageTitle.textContent = "Commissions";
   const columns = [
@@ -344,7 +367,7 @@ function switchView(view) {
   currentView = view;
   document.querySelectorAll(".nav-item").forEach(item => item.classList.toggle("active", item.dataset.view === view));
   document.querySelector(".sidebar").classList.remove("open");
-  const renderers = { dashboard: renderDashboard, commissions: renderCommissions, creator: renderCreator, client: renderClient, publications: renderPublications, assets: renderAssets, approvals: renderApprovals, royalties: renderRoyalties, integrations: renderIntegrations };
+  const renderers = { dashboard: renderDashboard, features: renderFeatures, commissions: renderCommissions, creator: renderCreator, client: renderClient, publications: renderPublications, assets: renderAssets, approvals: renderApprovals, royalties: renderRoyalties, integrations: renderIntegrations };
   (renderers[view] || renderDashboard)();
   window.scrollTo({top:0, behavior:"smooth"});
 }
