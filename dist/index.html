@@ -22,9 +22,12 @@
       <nav class="nav" aria-label="Primary navigation">
         <button class="nav-item active" data-view="dashboard"><span class="nav-icon">⌂</span><span>Overview</span></button>
         <button class="nav-item" data-view="commissions"><span class="nav-icon">◇</span><span>Commissions</span><em id="navCommissionCount">4</em></button>
+        <button class="nav-item" data-view="creator"><span class="nav-icon">✦</span><span>Creator studio</span><em id="navTaskCount">5</em></button>
+        <button class="nav-item" data-view="client"><span class="nav-icon">◎</span><span>Client portal</span></button>
         <button class="nav-item" data-view="publications"><span class="nav-icon">▤</span><span>Publications</span></button>
         <button class="nav-item" data-view="assets"><span class="nav-icon">□</span><span>Assets & rights</span><em class="warning-count">3</em></button>
         <button class="nav-item" data-view="approvals"><span class="nav-icon">✓</span><span>Approvals</span><em id="navApprovalCount">6</em></button>
+        <button class="nav-item" data-view="royalties"><span class="nav-icon">£</span><span>Sales & royalties</span></button>
         <button class="nav-item" data-view="integrations"><span class="nav-icon">↔</span><span>Integrations</span></button>
       </nav>
 
@@ -45,6 +48,14 @@
           <h1 id="pageTitle">Good morning</h1>
         </div>
         <div class="top-actions">
+          <label class="role-switcher">
+            <span>View as</span>
+            <select id="workspaceMode" aria-label="Choose workspace role">
+              <option value="publisher">Publisher</option>
+              <option value="creator">Content provider</option>
+              <option value="client">Customer</option>
+            </select>
+          </label>
           <label class="search-box">
             <span>⌕</span>
             <input id="globalSearch" type="search" placeholder="Search projects, titles, people" aria-label="Search" />
@@ -81,6 +92,20 @@
 
   <dialog id="detailDialog" class="dialog detail-dialog">
     <div id="detailContent"></div>
+  </dialog>
+
+  <dialog id="actionDialog" class="dialog">
+    <form id="actionForm" method="dialog">
+      <div class="dialog-head">
+        <div><span class="eyebrow" id="actionEyebrow">Workspace action</span><h2 id="actionTitle">Add item</h2></div>
+        <button type="button" class="icon-button" data-action-close aria-label="Close">×</button>
+      </div>
+      <div id="actionFields" class="form-grid"></div>
+      <div class="dialog-actions">
+        <button type="button" class="secondary-button" data-action-close>Cancel</button>
+        <button type="submit" class="primary-button" id="actionSubmit">Save</button>
+      </div>
+    </form>
   </dialog>
 
   <div id="toast" class="toast" role="status"></div>
